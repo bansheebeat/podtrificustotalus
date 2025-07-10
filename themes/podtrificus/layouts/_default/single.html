@@ -1,0 +1,31 @@
+{{ define "main" }}
+<div class="postHead" style="background-image:url({{ .Params.featuredImage }})">
+    <div class="overlay">
+        <h1>{{ .Title }}</h1>
+        <div class="postMeta">
+            <span class="date">{{ .Date | time.Format "2 January 2006" }}</span>
+            <span class="tags">
+                {{- if .Params.tags -}}
+                    {{- range $index, $tag := .Params.tags -}}{{- if gt $index 0 }} | {{ end -}}
+                        <a href="{{ "tags/" | relLangURL }}{{ . | urlize | lower }}" rel="tag">{{ . }}</a>
+                    {{- end -}}
+                {{- end -}}
+            </span>
+        </div>
+    </div>
+</div>
+{{ partial "metadata.html" . }}
+
+{{ .Content }}
+
+<div class="postNav">
+    {{ if .Prev }}
+        <a class="link-reverse" href="{{ .Prev.Permalink }}?ref=footer">« {{ .Prev.Title | truncate 50 "..." }}</a>
+    {{ end }}
+
+    {{ if .Next }}
+        <a class="link-reverse" href="{{ .Next.Permalink }}?ref=footer">{{ .Next.Title | truncate 50 "..."}} »</a>
+    {{ end }}
+</div>
+
+{{ end }}

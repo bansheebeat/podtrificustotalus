@@ -1,0 +1,18 @@
+baseURL = 'https://podtrificustotalus.com'
+languageCode = 'en-us'
+title = 'Podtrificus Totalus'
+theme = 'podtrificus'
+
+[markup.goldmark.renderer]
+  unsafe = true # Allow HTML in md files
+
+[permalinks]
+  episodes = "/:contentbasename"
+
+[outputs]
+home = ["HTML", "RSS", "podcast" ] # Sets up podcast feed
+
+[outputFormats]
+    [outputFormats.podcast]
+        MediaType = "application/rss+xml"
+        BaseName = "feed" # Your feed will be located at example.org/feed.xml. If you edit this value, you need to edit line 43 in layouts/index.podcast.xml.

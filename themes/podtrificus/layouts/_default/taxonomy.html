@@ -1,0 +1,17 @@
+{{ define "main" }}
+  <h1>{{ .Title }}</h1>
+  {{ .Content }}
+    <div class="tagsPage">
+    {{ range .Data.Pages.GroupByDate "2006-01" "asc" }}
+    {{ range .Pages }}
+        <a href="{{ .RelPermalink }}" class="tagsHead" style="background-image:url({{ .Params.featuredImage }})">
+            <div class="tagsOverlay">
+                <span class="title">{{ .LinkTitle }}</span>
+                <span class="date">{{ .Date | time.Format "2 January 2006" }}</span>
+            </div>
+        </a>
+    {{ end }}
+    {{ end }}
+    </div>
+{{ end }}
+

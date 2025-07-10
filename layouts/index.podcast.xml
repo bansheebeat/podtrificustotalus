@@ -1,0 +1,81 @@
+{{- $pctx := . -}}
+{{- if .IsHome -}}{{ $pctx = .Site }}{{- end -}}
+{{- $pages := slice -}}
+{{- if or $.IsHome $.IsSection -}}
+{{- $pages = $pctx.RegularPages -}}
+{{- else -}}
+{{- $pages = $pctx.Pages -}}
+{{- end -}}
+{{- $limit := .Site.Config.Services.RSS.Limit -}}
+{{- if ge $limit 1 -}}
+{{- $pages = $pages | first $limit -}}
+{{- end -}}
+{{- printf "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>" | safeHTML }}
+<rss version="2.0" 
+  xmlns:atom="http://www.w3.org/2005/Atom"
+  xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd"
+  xmlns:podcast="https://podcastindex.org/namespace/1.0"
+  xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Podtrificus Totalus</title>
+    <link>https://podtrificustotalus.com</link>
+    <language>en-us</language>
+    <copyright>&#169; {{ dateFormat "2006" now }} Podtrificus Totalus</copyright>
+    <itunes:author>Podtrificus Totalus</itunes:author>
+    <description>Podtrificus Totalus was a Harry Potter read along podcast done one chapter at a time.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    
+    <itunes:type>episodic</itunes:type>
+    <itunes:owner>
+      <itunes:name>Podtrificus Totalus</itunes:name>
+      <itunes:email>owlpost@podtrificustotalus.com</itunes:email>
+    </itunes:owner>
+    <itunes:image href="https://podtrificustotalus.com/podtrificus.jpg" />
+    <image>
+      <url>https://podtrificustotalus.com/podtrificus.webp</url>
+      <title>Podtrificus Totalus</title>
+      <link>https://podtrificustotalus.com</link>
+    </image>
+    <itunes:category text="Arts">
+      <itunes:category text="Books"/>
+    </itunes:category>
+    <itunes:explicit>false</itunes:explicit>
+    <itunes:summary>Podtrificus Totalus was a Harry Potter read along podcast done one chapter at a time.</itunes:summary>
+    <atom:link 
+      href="https://podtrificustotalus.com/feed.xml" 
+      rel="self" 
+      type="application/rss+xml" />
+    <lastBuildDate>{{ .Date.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</lastBuildDate>
+    <itunes:new-feed-url>
+      https://podtrificustotalus.com/feed.xml
+    </itunes:new-feed-url>
+
+    {{ range (where .Site.RegularPages "Section" "episodes") }}
+    
+    <item>
+      <title>{{ .Params.Title }}</title>
+      <link>{{ .Permalink }}</link>
+      <itunes:episodeType>full</itunes:episodeType>
+      <itunes:title>{{ .Params.episodeTitle }}</itunes:title>
+      <description>
+          {{ .Params.episodeSubtitle }}
+      </description>
+      <content:encoded>
+        {{ `<![CDATA[` | safeHTML }}{{ .Content }}{{ `]]>` | safeHTML }}
+      </content:encoded>
+      <itunes:summary>
+        {{ `<![CDATA[` | safeHTML }}{{ .Content }}{{ `]]>` | safeHTML }}
+      </itunes:summary>
+      <itunes:subtitle>{{ .Params.episodeSubtitle | plainify }}</itunes:subtitle>
+      <enclosure length="{{ .Params.episodeLength }}" type="audio/mpeg" url="{{ .Params.episodeURL }}" />
+      <guid>{{ .Permalink }}</guid>
+      <pubDate>{{ .PublishDate.Format "Mon, 02 Jan 2006 15:04:00 -0700" }}</pubDate>
+      <itunes:duration>{{ .Params.episodeDuration }}</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:season>{{ .Params.episodeSeason }}</itunes:season>
+      <podcast:season>{{ .Params.episodeSeason }}</podcast:season>
+      <itunes:episode>{{ .Params.episodeNumber }}</itunes:episode>
+      <podcast:episode>{{ .Params.episodeNumber }}</podcast:episode>
+    </item>
+  {{ end }}</channel>
+</rss>

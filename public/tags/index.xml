@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on Podtrificus Totalus</title>
+    <link>https://podtrificustotalus.com/tags/</link>
+    <description>Recent content in Tags on Podtrificus Totalus</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 31 May 2021 06:00:24 -0400</lastBuildDate>
+    <atom:link href="https://podtrificustotalus.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Prisoner of Azkaban</title>
+      <link>https://podtrificustotalus.com/tags/prisoner-of-azkaban/</link>
+      <pubDate>Mon, 31 May 2021 06:00:24 -0400</pubDate>
+      <guid>https://podtrificustotalus.com/tags/prisoner-of-azkaban/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Chamber of Secrets</title>
+      <link>https://podtrificustotalus.com/tags/chamber-of-secrets/</link>
+      <pubDate>Mon, 29 Jun 2020 07:30:42 -0400</pubDate>
+      <guid>https://podtrificustotalus.com/tags/chamber-of-secrets/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Philosopher&#39;s Stone</title>
+      <link>https://podtrificustotalus.com/tags/philosophers-stone/</link>
+      <pubDate>Tue, 02 Jul 2019 07:00:04 -0400</pubDate>
+      <guid>https://podtrificustotalus.com/tags/philosophers-stone/</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>
